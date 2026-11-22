@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DabbaDash - LastMile Bite Battle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="logo">🍔 DabbaDash</div>
+        <div class="header-right">
+            <span class="live-dot"></span>
+            <span>Live Kitchen Dashboard</span>
+            <span class="admin">Admin</span>
+        </div>
+    </header>
+
+    <aside class="sidebar" aria-label="Main navigation">
+        <p class="sidebar-label">WORKSPACE</p>
+        <nav class="side-nav">
+            <a class="active" href="#dashboard">▦ <span>Dashboard</span></a>
+            <a href="#orders">☷ <span>Orders</span></a>
+            <a href="#riders">♧ <span>Riders</span></a>
+            <a href="#zones">⌖ <span>Delivery Zones</span></a>
+            <a href="#tracking">◉ <span>Customer Tracking</span></a>
+            <a href="#calculator">₹ <span>Trip Calculator</span></a>
+        </nav>
+        <div class="sidebar-note">
+            <span class="sidebar-note-dot"></span>
+            <div><strong>System online</strong><small>Demo environment</small></div>
+        </div>
+    </aside>
+
+    <div class="container" id="dashboard">
+
+        <section class="welcome">
+            <div>
+                <h1>Kitchen Command Center</h1>
+                <p>Manage orders, riders and deliveries in one place.</p>
+            </div>
+            <button class="primary-btn" onclick="addOrder()">+ New Order</button>
+        </section>
+
+        <!-- KPI CARDS -->
+        <section class="stats">
+            <div class="stat-card">
+                <p>Active Orders</p>
+                <h2 id="activeCount">0</h2>
+                <span>Orders in progress</span>
+            </div>
+
+            <div class="stat-card">
+                <p>Average Prep Time</p>
+                <h2 id="avgPrep">12 min</h2>
+                <span>Kitchen performance</span>
+            </div>
+
+            <div class="stat-card">
+                <p>Dispatched</p>
+                <h2 id="dispatchCount">0</h2>
+                <span>Orders on the way</span>
+            </div>
+
+            <div class="stat-card">
+                <p>Available Riders</p>
+                <h2 id="riderCount">0</h2>
+                <span>Ready for delivery</span>
+            </div>
+        </section>
+
+        <!-- ALERTS -->
+        <section class="alert-section">
+            <h2>⚠ Kitchen Bottleneck Alerts</h2>
+            <div id="alerts">
+                <p class="no-alert">No delayed orders right now.</p>
+            </div>
+        </section>
+
+        <!-- BRAND FILTER -->
+        <section class="section" id="orders">
+            <div class="section-heading">
+                <h2>Multi-Brand Order Feed</h2>
+                <select id="brandFilter" onchange="renderOrders()">
+                <option value="All">All Brands</option>
+                <option value="Biryani Box">Biryani Box</option>
+                <option value="Burger Den">Burger Den</option>
+                <option value="Chai Point">Chai Point</option>
+            </select>
+            </div>
+
+            <div class="kanban" id="orderBoard"></div>
+        </section>
+
+        <!-- RIDERS -->
+        <section class="section" id="riders">
+            <h2>🚴 Delivery Rider Dispatch Console</h2>
+            <div class="rider-grid" id="riderBoard"></div>
+        </section>
+
+        <!-- ZONE BATCHING -->
+        <section class="section" id="zones">
+            <h2>📍 Hyperlocal Delivery Zone Batcher</h2>
+            <p class="subtitle">Group orders going to the same delivery sector.</p>
+            <div id="zoneBoard" class="zone-grid"></div>
+        </section>
+
+        <!-- CUSTOMER TRACKING -->
+        <section class="section tracking-section" id="tracking">
+            <h2>📦 Customer Live Order Tracking</h2>
+
+            <div class="tracking-content">
+                <div>
+                    <label>Select Order</label>
+                    <select id="trackingSelect" onchange="renderTracking()"></select>
+                    <h3 id="customerOrder">Order #101</h3>
+                    <p id="customerBrand">Biryani Box</p>
+                    <h2 id="customerStatus">Order Received</h2>
+                    <p id="customerMessage">Your order has been received.</p>
+                    <h3 id="eta">Estimated time: 20 minutes</h3>
+                </div>
+
+                <div class="delivery-animation">
+                    <div class="road">
+                        <span>🏠</span>
+                        <span id="vehicle">🛵</span>
+                        <span>📍</span>
+                    </div>
+                    <p>Track your food delivery</p>
+                </div>
+            </div>
+
+            <div class="stepper" id="stepper"></div>
+        </section>
+
+        <!-- PAYOUT CALCULATOR -->
+        <section class="section" id="calculator">
+            <h2>💰 Rider Trip Calculator</h2>
+            <div class="calculator">
+                <div>
+                    <label>Delivery Distance (KM)</label>
+                    <input type="number" id="distance" value="2" min="0">
+                </div>
+                <div>
+                    <label>Surge Pay (₹)</label>
+                    <input type="number" id="surge" value="10" min="0">
+                </div>
+                <button class="primary-btn" onclick="calculatePay()">Calculate</button>
+                <h3 id="payout">Total Payout: ₹0</h3>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>© 2026 DabbaDash | LastMile Bite Battle Hackathon Project</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
